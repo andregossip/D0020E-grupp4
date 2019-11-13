@@ -1,11 +1,8 @@
 # D0020E-grupp4
 Appendix 1
-testtest
-test
-test
       Inledning
 1.1.   Bakgrund
-
+wrpiejgwigj
 Kort övergripande beskrivning av teknikområdet, teknik som används i projektet, etc.
 
 1.2.   Uppgift
