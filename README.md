@@ -2,7 +2,7 @@
 Appendix 1
       Inledning
 1.1.   Bakgrund
-wrpiejgwigj
+
 Kort övergripande beskrivning av teknikområdet, teknik som används i projektet, etc.
 
 1.2.   Uppgift
