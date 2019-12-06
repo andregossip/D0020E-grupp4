@@ -1,65 +1,7 @@
-# D0020E-grupp4
-Appendix 1
-      Inledning
-1.1.   Bakgrund
+1.Inledning
+1.1.Bakgrund Övergripande beskrivning av den det behov som projektet ska möta och vad som finns gjort sedan tidigare för att möta detta eller liknande behov. 
+1.2.Problembeskrivning Beskrivning av det övergripande problem som projektet ska arbeta med, kopplat till bakgrunden. 1.3.Uppgift Beskrivning av projektuppgift, kopplat till problembeskrivning. 
+1.4.Avgränsning Beskrivning av sådant som hade kunnat ingå i uppgiften men explicit uteslutits från arbetet, kopplat till problembeskrivning och uppgift. 
 
-Kort övergripande beskrivning av teknikområdet, teknik som används i projektet, etc.
-
-1.2.   Uppgift
-
-Övergripande beskrivning av projektuppgift, kopplat till bakgrunden och motivation av uppgiften
-
-1.3.   Problembeskrivning
-
-Konkret beskrivning av vad som ska åstadkommas
-
-1.4.   Avgränsning
-
-Beskrivning av sådant som hade kunnat ingå i uppgiften men explicit uteslutits från arbetet
-
- 
-
-      Kravspecifikation
-2.1.   Användarkarakteristik – aktörer
-
-2.2.   Användarfall och funktionella krav
-
-2.3.   System och icke-funktionella krav
-
-2.4.   Användarkrav
-
-2.5.   Interfacespecifikation och storyboards
-
-2.6.   Testbarhet
-
- 
-
-      Systemdesign
-3.1.   Statisk design
-
-Compile-time
-
-3.1.1. Klassdiagram
-
-3.1.2. Moduldiagram
-
-3.2.   Dynamisk design
-
-Run-time
-
-3.2.1. Aktivitetsdiagram
-
-3.2.2. Sekvensdiagram
-
-3.2.3. Tillståndsdiagram
-
- 
-
-      Genomförande
-4.1.   Projektledning och genomförande
-
-Beskrivning utifrån projektets medlemmar, roller, möten, leveranser, planering av uppgifter, arbete med projektägare och hantering av projektvariablerna omfattning och kvalité
-
-4.2.   Resurs och aktivitetsplan
-
-Övergripande beskrivning av hur uppgiften brutits ned och hur deluppgifter fördelats mellan projektmedlemmar, med kommentarer på flexibilitet (både vad som varit bra och vad som kunde gjorts bättre)
+2.Systemdesign Projektgruppen väljer minst en av designbeskrivningarna från kursens föreläsningar och laborationer, dvs. statisk design, klassdiagram, moduldiagram, dynamisk design, aktivitetsdiagram, sekvensdiagram, och/eller tillståndsdiagram. 
+Systemdesignen ska bestå av en eller flera designbeskrivningar och en kort beskrivande text. Beskrivningen ska; (1) ge en övergripande förståelse för designen men behöver inte förklara den i detalj, samt(2) beskriva och motivera övergripande designval. En första version av designbeskrivningen görs under LP 2 och uppdateras i LP 3 efter var och en av de två Sprinterna. Beskrivningen användas i dialog med handledare och för att beskriva lösningen när projektet avslutas. 
