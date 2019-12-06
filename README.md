@@ -1,5 +1,5 @@
 1.Inledning 
-1.1.Bakgrund Övergripande beskrivning av den det behov som projektet ska möta och vad som finns gjort sedan tidigare för att möta detta eller liknande behov. 
+1.1. Bakgrund Övergripande beskrivning av den det behov som projektet ska möta och vad som finns gjort sedan tidigare för att möta detta eller liknande behov. 
 
 1.2.Problembeskrivning Beskrivning av det övergripande problem som projektet ska arbeta med, kopplat till bakgrunden. 
 
