@@ -11,7 +11,7 @@ We did not inherit code from a previous project, but we have some experience cre
 
 
 <h2>1.2. Problem Description </h2>
-<p>The  project  aims  to  design  a  simulator  that  simulates  a  P2P-network  where different nodes communicates with each other by sending different types of data without a centralized server. An api and an interface is needed to the project aswell. The interface should communicate with the simulator through the api and the api should be well defined and accessible for others. The interface should represent the data that the simulator produces and should be simple enough for a non experinced user to use it </p>
+<p>The  project  aims  to  design  a  simulator  that  simulates  a  P2P-network  where different nodes communicates with each other by sending different types of data without a centralized server. An api and an interface is needed to the project aswell. The interface should communicate with the simulator through the api and the api should be well defined and accessible for others. The interface should represent the data that the simulator produces and should be simple enough for a non experinced user to use it. </p>
 
 <h2>1.3. Assignment</h2> 
 
