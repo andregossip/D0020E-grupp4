@@ -4,19 +4,11 @@
 
 <p>
 
-The project aims to provide web-based P2P simulation software for P2P-networks. The project provides a service where a user can upload and simulate their own P2P networks to visualize, over time, the current state of nodes and links as files are transferred over the network.
+The project aims to provide web-based simulation and visualization software for P2P-networks. The project provides a service where a user can upload and simulate their own P2P networks to visualize, over time, the current state of nodes and links as files are transferred over the network.
 
-We did not inherit code from a previous project, but we have some experience in creating simulation software from other projects.  We have found some P2P networks simulators implemented in other languages that we can take inspiration from. We were also informed to take a look at Kademlia(reference), which is a P2P distributed hash table.
+We did not inherit code from a previous project, but we have some experience creating simulation software from other projects.  We have found some P2P networks simulators implemented in other languages that we can take inspiration from.
 
-  
- 
-13
-The project aims to provide web-based P2P simulation software for arbitrary P2P-networks. The project provides a service where the user can upload and simulate their own P2P networks to visualize, over time, the current state of nodes as files are transferred over the network. a
-14
-​
-15
-The amount of resources available to us is limited to solely online resources, we did not inherit anything from previous projects or solutions. We have found some P2P networks simulators implemented in other languages that we can take inspiration from. We were also informed to take a look at Kademlia(reference), which is a P2P distributed hash table.
-</p>
+
 
 <h2>1.2. Problem Description </h2>
 <p>The  project  aims  to  design  a  simulator  that  simulates  a  P2P-network  where different nodes communicates with each other by sending different types of data without a centralized server. </p>
