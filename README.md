@@ -6,7 +6,11 @@ The project aims to provide web-based P2P simulation software for arbitrary P2P-
 
 1.2. Problembeskrivning Beskrivning av det övergripande problem som projektet ska arbeta med, kopplat till bakgrunden. 
 
-1.3. Uppgift Beskrivning av projektuppgift, kopplat till problembeskrivning. 
+1.3. Uppgift The project will consist of a P2P simulation engine, and a visualization tool. Our solution will hopefully be able to aid in future research within distributed machine learning through allowing researchers to visualize traffic in a P2P network of machine learning nodes. Some of the features of the software will be:
+
+-An easy to read graphical user interface 
+-
+-
 
 1.4.
 Avgränsning Beskrivning av sådant som hade kunnat ingå i uppgiften men explicit uteslutits från arbetet, kopplat till problembeskrivning och uppgift. 
