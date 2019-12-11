@@ -21,10 +21,11 @@ The project will consist of a P2P simulation engine, and a visualization tool. O
 
 <h2>1.4.Delimitations </h2>
 <p>
-NOT IN REAL TIME
-JOINS AND DISCONNECT
-TCP/UDP
-DATABAS
+- NOT IN REAL TIME
+- JOINS AND DISCONNECT
+- TCP/UDP
+- DATABAS
+- MAX 20 NODES
 </p>
 
 <h1>2.Systemdesign </h1>
