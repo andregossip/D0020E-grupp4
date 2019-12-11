@@ -26,6 +26,7 @@ Current delimitations of the engine are:
 - No nodes are able to join or leave the network during the simulation.
 - User will not be able to specify what data transfer protocol is used on the network
 - No database
+
 Current delimitations of the GUI are:
 - A maximum of 20 nodes, to limit screen clutter.
 
