@@ -1,9 +1,20 @@
 <h1>1. Introduction </h1>
 <h2>1.1. Background</h2>
 <!-- needs -->
-<p>
-The project aims to provide web-based P2P simulation software for arbitrary P2P-networks. The project provides a service where the user can upload and simulate their own P2P networks to visualize, over time, the current state of nodes as files are transferred over the network. a
 
+<p>
+
+The project aims to provide web-based P2P simulation software for P2P-networks. The project provides a service where a user can upload and simulate their own P2P networks to visualize, over time, the current state of nodes and links as files are transferred over the network.
+
+We did not inherit code from a previous project, but we have some experience in creating simulation software from other projects.  We have found some P2P networks simulators implemented in other languages that we can take inspiration from. We were also informed to take a look at Kademlia(reference), which is a P2P distributed hash table.
+
+  
+ 
+13
+The project aims to provide web-based P2P simulation software for arbitrary P2P-networks. The project provides a service where the user can upload and simulate their own P2P networks to visualize, over time, the current state of nodes as files are transferred over the network. a
+14
+​
+15
 The amount of resources available to us is limited to solely online resources, we did not inherit anything from previous projects or solutions. We have found some P2P networks simulators implemented in other languages that we can take inspiration from. We were also informed to take a look at Kademlia(reference), which is a P2P distributed hash table.
 </p>
 
@@ -21,11 +32,10 @@ The project will consist of a P2P simulation engine, and a visualization tool. O
 
 <h2>1.4.Delimitations </h2>
 <p>
-- NOT IN REAL TIME
-- JOINS AND DISCONNECT
-- TCP/UDP
-- DATABAS
-- MAX 20 NODES
+NOT IN REAL TIME
+JOINS AND DISCONNECT
+TCP/UDP
+DATABAS
 </p>
 
 <h1>2.Systemdesign </h1>
