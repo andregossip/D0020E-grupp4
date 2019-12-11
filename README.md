@@ -14,9 +14,9 @@ The amount of resources available to us is limited to solely online resources, w
 
 The project will consist of a P2P simulation engine, and a visualization tool. Our solution will hopefully be able to aid in future research within distributed machine learning through allowing researchers to visualize traffic in a P2P network of machine learning nodes. Some of the features of the software will be:
 
--An easy to read GUI containing a time dimension, allowing users to visualize the state of the network at any given time during a simulation.
--Node data generation can be specified by the user utilizing mathematical functions or other defined conditions and events.
--High customisability potential for advanced users with a well defined API.
+- An easy to read GUI containing a time dimension, allowing users to visualize the state of the network at any given time during a simulation.
+- Node data generation can be specified by the user utilizing mathematical functions or other defined conditions and events.
+- High customisability potential for advanced users with a well defined API.
 
 
 <h2>1.4.Delimitations </h2>
