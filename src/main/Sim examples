@@ -1,0 +1,15 @@
+EX 2:
+
+long TIME_SEED_X = 13; 			
+int MAX_CUSTOMERS_X = 7; 			
+int MAX_REGISTERS_X = 2; 			
+int TIME_STORE_CLOSE_X = 8; 		
+double ARRIVAL_SPEED_X = 3.0d; 	
+double MIN_PICKING_TIME_X = 0.6d; 	
+double MAX_PICKING_TIME_X = 0.9d; 	
+double MIN_CHECKOUT_TIME_X = 0.35d; 	
+double MAX_CHECKOUT_TIME_X = 0.6d;
+
+
+
+/////////////////////////OPTIMIZE 
