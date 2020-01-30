@@ -7,7 +7,7 @@
  * 
  */
 
-package store.time;
+package p2p.time;
 
 import java.util.Random;
 

@@ -1,12 +1,5 @@
-/**
- * 
- * @author Nour Aldein Bahtite
- * @author Philip Eriksson
- * @author Rickard Bemm
- * @author André Christofferson
- * 
- */
-package store.time;
+
+package p2p.time;
 
 import java.util.Random;
 
