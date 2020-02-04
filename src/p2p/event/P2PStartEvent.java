@@ -14,7 +14,11 @@ public class P2PStartEvent extends StartEvent{
 	public void runEvent() {
         P2PState s = (P2PState) state;
         s.updateState(this);
-        //hard-coded for now
+        /**
+         * Creates the Nodes in the network
+         * TODO
+         * Should change i<2 to be i<"numberOfNodes"
+         */
         for(int i=0; i<2; i++){
             s.nodesList[i] = s.createNewNode();
         }
