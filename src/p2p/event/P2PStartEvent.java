@@ -20,7 +20,7 @@ public class P2PStartEvent extends StartEvent{
          * Maybe put this in the constructor of P2PState instead
          * Fix so all nodes sends file, the last does not send anything now
          */
-        double nextExecuteTime = 0;
+        double nextExecuteTime = s.getElapsedTime();
         for(int i=0; i<s.getNrOfNodes(); i++){
             s.nodesList[i] = s.createNewNode();
             nextExecuteTime = s.getElapsedTime() + 0.01;
