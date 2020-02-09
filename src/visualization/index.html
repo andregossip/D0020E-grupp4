@@ -17,10 +17,14 @@
         stroke: #ccc;
     }
 </style>
-<body>
+<body onload="eventNumberToHtml()">
 <script>
     var width = window.innerWidth,
     height = 600;
+
+    var numberOfEvents = d3.csv("node.csv").then(function (data) {
+        data.length;
+    })
 
     var colorScale = ['orange', 'lightblue', '#B19CD9'];
     var xScale = d3.scaleLinear().domain([0, 1]).range([0, 1000]);
@@ -80,7 +84,6 @@
             .attr('y2', function(d) {
                 return d.target.y
             });
-        console.log("this is link talking")
         u.exit().remove()
     }
 
@@ -106,18 +109,18 @@
             })
 
         u.on("click", function(d) {
-            console.log("You clicked", d);
             if(d.clicked == 0)
             {
                 d3.select(this).style("fill","lightcoral");
                 d3.select(this).attr('r', d.radius*2);
-                updatePie(data1)
+                showPie();
                 d.clicked++;
             }
             else
             {
                 d3.select(this).style("fill","#000");
                 d3.select(this).attr('r', d.radius);
+                removePie();
                 d.clicked--;
             }
         });
@@ -125,16 +128,38 @@
         u.exit().remove();
     }
 
-    d3.csv("node.csv").then(function(data) {
-        console.log(data); // Parsing first CSV-object
-    });
+    let currentEvent=-1;
+    function nextEvent() {
+        currentEvent++;
+        d3.csv("node.csv").then(function (data) {
+            updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
+
+        })
+        eventNumberToHtml()
+    }
+
+    function previousEvent() {
+        currentEvent--;
+        d3.csv("node.csv").then(function (data) {
+
+            updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
+        })
+        eventNumberToHtml()
+
+    }
 
     function ticked() {
         updateLinks();
         updateNodes();
     }
+    function eventNumberToHtml() {
+        document.getElementById("output").innerHTML = currentEvent;
+    }
+
+
 </script>
 <div id="my_dataviz"></div>
+<p>event nr is:</p><p id="output"></p><
 <script>
 
     // set the dimensions and margins of the graph
@@ -210,6 +235,8 @@
 <button onclick="updatePie(data2)">Data 2</button>
 <button onclick="removePie()">Remove</button>
 <button onclick="showPie()">Show</button>
+<button onclick="previousEvent()">Prev event</button>
+<button onclick="nextEvent()">Next event</button>
 <p>vasfan</p>
 
 </body>
