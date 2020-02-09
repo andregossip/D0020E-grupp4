@@ -9,12 +9,14 @@ import p2p.view.P2PView;
 
 public class Simulation {
     public static void main(String[] args) {
-        int nrOfNodes = 4;
+        int nrOfNodes = 5;
         double TIME_SIM_STOP = 0.5;
-
+        long TIME_SEED = 1234; 
+        double ARRIVAL_SPEED = 32;
+        
         P2PView view = new P2PView("/Users/andre/Documents/D0020E/Output/text.txt");
-        EventQueue eventQueue = new EventQueue();
-        P2PState state = new P2PState(nrOfNodes, eventQueue, TIME_SIM_STOP);
+        EventQueue eventQueue = new EventQueue();	
+        P2PState state = new P2PState(ARRIVAL_SPEED, TIME_SEED, nrOfNodes,eventQueue, TIME_SIM_STOP);
 
         //Create and add events
         eventQueue.addEvent(new P2PStartEvent(state));

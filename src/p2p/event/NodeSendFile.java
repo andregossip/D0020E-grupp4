@@ -27,6 +27,7 @@ public class NodeSendFile extends Event {
     public void runEvent() {
     	P2PState s = (P2PState) state;
     	s.updateState(this);
-    	//eventQueue.addEvent(new NodeSendFile(s, node, 0.01));
+    	double nextExecuteTime = s.getElapsedTime() + 0.01;
+    	eventQueue.addEvent(new NodeReceivedFile(s, source, destination, nextExecuteTime));
     }
 }

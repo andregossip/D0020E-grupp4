@@ -17,16 +17,22 @@ public class P2PStartEvent extends StartEvent{
         /**
          * Creates the Nodes in the network
          * TODO
-         * Should change i<2 to be i<"numberOfNodes"
+         * Maybe put this in the constructor of P2PState instead
+         * Fix so all nodes sends file, the last does not send anything now
          */
-        for(int i=0; i<2; i++){
+        double nextExecuteTime = 0;
+        for(int i=0; i<s.getNrOfNodes(); i++){
             s.nodesList[i] = s.createNewNode();
+            nextExecuteTime = s.getElapsedTime() + 0.01;
+            if (i != 0) {
+            	eventQueue.addEvent(new NodeSendFile(s, s.getNode(i-1),s.getNode(i), nextExecuteTime));
+            }
         }
         /*
          * TODO
          * Fix nextExecuteTime
          */
-        double nextExecuteTime = s.getElapsedTime() + 0.01;
-        eventQueue.addEvent(new NodeSendFile(s, s.nodesList[0],s.nodesList[1], nextExecuteTime));
+//       nextExecuteTime = s.getElapsedTime() + 0.01;
+//       eventQueue.addEvent(new NodeSendFile(s, s.nodesList[0],s.nodesList[1], nextExecuteTime));
     }
 }

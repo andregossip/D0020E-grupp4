@@ -26,7 +26,8 @@ public class P2PView extends SimView{
             result += generateProgress(state);
         }
         else{
-            printFile(Filepath, true);
+           // printFile(Filepath, true);
+            printConsole();
         }
     }
     public String generateProgress(P2PState state) {
@@ -35,11 +36,10 @@ public class P2PView extends SimView{
     	result += ",";
     	result += state.getEventDescription();
     	if(state.getNodeWhoPerformedEvent() != "-") {
-    		result += ",";
+    		result += ", Node: ";
     		result += state.getNodeWhoPerformedEvent();
     	}
     	result += "\n";
-    		
     	return result;
     }
     @Override
