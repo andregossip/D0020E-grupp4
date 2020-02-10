@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>P2P Visualization</title>
+    <title>Title</title>
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
     <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+
+
     <!-- Create a div where the graph will take place -->
 </head>
 <style>
@@ -17,20 +18,8 @@
     }
 </style>
 <body onload="eventNumberToHtml()">
-<body>
-<!----------------- NAVBAR ------------------>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">P2P SIM&VIS</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li><a href="#">Simulation</a></li>
-            <li class="active"><a href="#">Visualization</a></li>
-        </ul>
-    </div>
-</nav>
 <script>
+    var dummy = 0;
     var width = window.innerWidth,
     height = 600;
 
@@ -77,6 +66,18 @@
         .force('y', d3.forceY(0).strength(0))
         .on('tick', ticked);
 
+
+    function initPie() {
+        console.log("vafan")
+        d3.csv("node.csv").then(function (data) {
+            updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
+
+        })
+        console.log("benis")
+        eventNumberToHtml()
+    }
+
+
     function updateLinks() {
         var u = d3.select('svg')
             .selectAll('line')
@@ -119,9 +120,12 @@
             .attr('cy', function (d) {
                 return d.y;
             })
-
         u.on("click", function(d) {
-            if(d.clicked == 0)
+            if(dummy == 0){
+                initPie();
+                dummy++;
+            }
+            else if(d.clicked == 0)
             {
                 d3.select(this).style("fill","lightcoral");
                 d3.select(this).attr('r', d.radius*2);
@@ -140,12 +144,11 @@
         u.exit().remove();
     }
 
-    let currentEvent=-1;
+    let currentEvent=0;
     function nextEvent() {
         currentEvent++;
         d3.csv("node.csv").then(function (data) {
             updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
-
         })
         eventNumberToHtml()
     }
@@ -191,7 +194,7 @@
         .append("g")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-    // create 2 data_set
+    // create 2 data_set TESTING
     var data1 = {a: 9, b: 20, c:30, d:8, e:12}
     var data2 = {a: 6, b: 16, c:20, d:14, e:19, f:12}
 
