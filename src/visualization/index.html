@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>P2P Visualization</title>
     <script src="https://d3js.org/d3.v5.js"></script>
     <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
     <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-
-
-
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <!-- Create a div where the graph will take place -->
 </head>
 <style>
@@ -18,6 +17,19 @@
     }
 </style>
 <body onload="eventNumberToHtml()">
+<body>
+<!----------------- NAVBAR ------------------>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">P2P SIM&VIS</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="#">Simulation</a></li>
+            <li class="active"><a href="#">Visualization</a></li>
+        </ul>
+    </div>
+</nav>
 <script>
     var width = window.innerWidth,
     height = 600;
