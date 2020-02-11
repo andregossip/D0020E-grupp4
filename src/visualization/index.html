@@ -18,6 +18,16 @@
     }
 </style>
 <body onload="eventNumberToHtml()">
+
+<!-- Input field for traversing even numbers -->
+<p>
+    <label for="nValue" 
+        style="display: inline-block; width: 240px; text-align: right">
+        event number = <span id="nValue-value"></span>
+    </label>
+    <input type="number" min="0" max="50" step="1" value="0" id="nValue">
+</p>
+
 <script>
     var dummy = 0;
     var width = window.innerWidth,
@@ -66,7 +76,7 @@
         .force('y', d3.forceY(0).strength(0))
         .on('tick', ticked);
 
-
+    //Initialize the pie when entering the page
     function initPie() {
         console.log("vafan")
         d3.csv("node.csv").then(function (data) {
@@ -144,6 +154,7 @@
         u.exit().remove();
     }
 
+    //Event buttons
     let currentEvent=0;
     function nextEvent() {
         currentEvent++;
@@ -161,6 +172,32 @@
         })
         eventNumberToHtml()
 
+    }
+    function resetEvent(){
+        currentEvent = 0;
+        d3.csv("node.csv").then(function (data) {
+
+            updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
+        })
+        eventNumberToHtml()
+    }
+
+    //Event input field
+    // when the input range changes update value 
+    d3.select("#nValue").on("input", function() {
+        update(+this.value);
+    });
+
+    // Initial update value 
+    update(0);
+
+    // adjust the text
+    function update(nValue) {
+        currentEvent = nValue;
+        d3.csv("node.csv").then(function (data) {
+            updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
+    })
+    eventNumberToHtml()
     }
 
     function ticked() {
@@ -246,13 +283,16 @@
     }
 </script>
 
+
+
 <button onclick="updatePie(data1)">Data 1</button>
 <button onclick="updatePie(data2)">Data 2</button>
 <button onclick="removePie()">Remove</button>
 <button onclick="showPie()">Show</button>
 <button onclick="previousEvent()">Prev event</button>
 <button onclick="nextEvent()">Next event</button>
-<p>vasfan</p>
+<button onclick="resetEvent()">Reset events</button>
+
 
 </body>
 </html>
