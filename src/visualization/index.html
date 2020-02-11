@@ -17,7 +17,6 @@
     }
 </style>
 <body onload="eventNumberToHtml()">
-<body>
 <!----------------- NAVBAR ------------------>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -151,13 +150,39 @@
     }
 
     function previousEvent() {
-        currentEvent--;
+        if (currentEvent > 1) {
+            currentEvent--;
+        } else {
+            currentEvent = 0;
+        }
         d3.csv("node.csv").then(function (data) {
 
             updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
         })
         eventNumberToHtml()
 
+    }
+
+    function skipTenEvents() {
+        currentEvent += 10;
+        d3.csv("node.csv").then(function (data) {
+            updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
+
+        })
+        eventNumberToHtml()
+    }
+
+    function backTenEvents() {
+        if (currentEvent > 10) {
+            currentEvent -= 10;
+        } else {
+            currentEvent = 0;
+        }
+        d3.csv("node.csv").then(function (data) {
+            updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
+
+        })
+        eventNumberToHtml()
     }
 
     function ticked() {
@@ -170,8 +195,10 @@
 
 
 </script>
+
 <div id="my_dataviz"></div>
-<p>event nr is:</p><p id="output"></p><
+<p>event nr is:</p><p id="output"></p>
+
 <script>
 
     // set the dimensions and margins of the graph
@@ -249,7 +276,9 @@
 <button onclick="showPie()">Show</button>
 <button onclick="previousEvent()">Prev event</button>
 <button onclick="nextEvent()">Next event</button>
-<p>vasfan</p>
+<button onclick="skipTenEvents()">Skip 10 events</button>
+<button onclick="backTenEvents()">Back 10 events</button>
 
 </body>
 </html>
+
