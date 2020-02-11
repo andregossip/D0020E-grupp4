@@ -7,6 +7,7 @@
     <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
     <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="getNumberOfNodes.js"></script>
 
 
 
@@ -19,13 +20,10 @@
 </style>
 <body onload="eventNumberToHtml()">
 <script>
+
     var dummy = 0;
     var width = window.innerWidth,
     height = 600;
-
-    var numberOfEvents = d3.csv("node.csv").then(function (data) {
-        data.length;
-    })
 
     var colorScale = ['orange', 'lightblue', '#B19CD9'];
     var xScale = d3.scaleLinear().domain([0, 1]).range([0, 1000]);
@@ -66,10 +64,9 @@
         .force('y', d3.forceY(0).strength(0))
         .on('tick', ticked);
 
-
     function initPie() {
         console.log("vafan")
-        d3.csv("node.csv").then(function (data) {
+        d3.csv("nodes/node1.csv").then(function (data) {
             updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
 
         })
@@ -99,7 +96,6 @@
             });
         u.exit().remove()
     }
-
     function updateNodes() {
         var u = d3.select('svg')
             .selectAll('circle')
@@ -120,15 +116,18 @@
             .attr('cy', function (d) {
                 return d.y;
             })
-        u.on("click", function(d) {
-            if(dummy == 0){
-                initPie();
-                dummy++;
-            }
-            else if(d.clicked == 0)
+        u.on("click", function(d,i) {
+            // if(dummy == 0){
+            //     initPie();
+            //     dummy++;
+            // }
+            // else
+            if(d.clicked == 0)
             {
                 d3.select(this).style("fill","lightcoral");
                 d3.select(this).attr('r', d.radius*2);
+                nodeMarked = i;
+                csvFile();
                 showPie();
                 d.clicked++;
             }
@@ -144,21 +143,25 @@
         u.exit().remove();
     }
 
-    let currentEvent=0;
-    function nextEvent() {
-        currentEvent++;
-        d3.csv("node.csv").then(function (data) {
+    nodeMarked = -1;
+
+    function csvFile() {
+        d3.csv("nodes/node"+nodeMarked+".csv").then(function (data) {
             updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
         })
+    }
+
+    let currentEvent=0;
+
+    function nextEvent() {
+        currentEvent++;
+        csvFile();
         eventNumberToHtml()
     }
 
     function previousEvent() {
         currentEvent--;
-        d3.csv("node.csv").then(function (data) {
-
-            updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
-        })
+        csvFile();
         eventNumberToHtml()
 
     }
@@ -167,14 +170,15 @@
         updateLinks();
         updateNodes();
     }
+
     function eventNumberToHtml() {
         document.getElementById("output").innerHTML = currentEvent;
     }
 
 
 </script>
-<div id="my_dataviz"></div>
-<p>event nr is:</p><p id="output"></p><
+<div id="my_dataviz"><h2>Nodes data:</h2></div>
+<p>event nr is:</p><p id="output"></p>
 <script>
 
     // set the dimensions and margins of the graph
@@ -193,10 +197,6 @@
         .attr("height", height)
         .append("g")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-    // create 2 data_set TESTING
-    var data1 = {a: 9, b: 20, c:30, d:8, e:12}
-    var data2 = {a: 6, b: 16, c:20, d:14, e:19, f:12}
 
     // set the color scale
     var color = d3.scaleOrdinal()
@@ -252,7 +252,6 @@
 <button onclick="showPie()">Show</button>
 <button onclick="previousEvent()">Prev event</button>
 <button onclick="nextEvent()">Next event</button>
-<p>vasfan</p>
 
 </body>
 </html>
