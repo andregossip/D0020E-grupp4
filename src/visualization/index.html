@@ -190,7 +190,11 @@
     }
 
     function previousEvent() {
-        currentEvent--;
+        if (currentEvent > 1) {
+            currentEvent--;
+        } else {
+            currentEvent = 0;
+        }
         csvFile();
         eventNumberToHtml()
 
@@ -228,8 +232,6 @@
             updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
         })
         eventNumberToHtml()
-    })
-    eventNumberToHtml()
     }
 
     function ticked() {
