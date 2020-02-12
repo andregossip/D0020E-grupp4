@@ -7,7 +7,6 @@
     <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
     <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <script src="getNumberOfNodes.js"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
@@ -178,7 +177,13 @@
 
     function csvFile() {
         d3.csv("nodes/node"+nodeMarked+".csv").then(function (data) {
-            updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
+            updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP});
+            updateBar([
+                {group: `Event ${currentEvent}`, value: data[currentEvent].MAP},
+                {group: `Event ${currentEvent+1}`, value: data[currentEvent+1].MAP},
+                {group: `Event ${currentEvent+2}`, value: data[currentEvent+2].MAP}]);
+            print(data);
+            console.log("fan");
         })
     }
     let currentEvent=0;
@@ -202,7 +207,6 @@
     function resetEvent(){
         currentEvent = 0;
         d3.csv("node.csv").then(function (data) {
-
             updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
         })
         eventNumberToHtml()
@@ -234,6 +238,10 @@
         eventNumberToHtml()
     }
 
+    function print(data) {
+        console.log(data);
+    }
+
     function ticked() {
         updateLinks();
         updateNodes();
@@ -247,6 +255,8 @@
 </script>
 <div id="my_dataviz"><h2>Nodes data:</h2></div>
 <p>event nr is:</p><p id="output"></p>
+
+<!-- PIE CHART YOLO SWAG -->
 <script>
 
     // set the dimensions and margins of the graph
@@ -273,7 +283,7 @@
 
     // A function that create / update the plot for a given variable:
     function updatePie(data) {
-
+        console.log(data);
         // Compute the position of each group on the pie:
         var pie = d3.pie()
             .value(function(d) {return d.value; })
@@ -290,7 +300,7 @@
             .append('path')
             .merge(u)
             .transition()
-            .duration(1000)
+            .duration(0)
             .attr('d', d3.arc()
                 .innerRadius(0)
                 .outerRadius(radius)
@@ -312,6 +322,89 @@
     function showPie() {
         d3.select("tja").style("opacity", 1);
     }
+</script>
+
+<script>
+
+// create 2 data_set
+var data1 = [
+    {group: "A", value: 4},
+    {group: "B", value: 16},
+    {group: "C", value: 8}
+];
+
+var data2 = [
+    {group: "A", value: 7},
+    {group: "B", value: 1},
+    {group: "C", value: 20},
+    {group: "D", value: 10}
+];
+
+// set the dimensions and margins of the graph
+var margin = {top: 30, right: 30, bottom: 70, left: 60},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg2 = d3.select("#my_dataviz")
+    .append("tja2")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+         .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+// Initialize the X axis
+var x = d3.scaleBand()
+    .range([ 0, width ])
+    .padding(0.2);
+var xAxis = svg2.append("g")
+    .attr("transform", "translate(0," + height + ")")
+
+// Initialize the Y axis
+var y = d3.scaleLinear()
+    .range([ height, 0]);
+var yAxis = svg2.append("g")
+    .attr("class", "myYaxis")
+
+
+// A function that create / update the plot for a given variable:
+function updateBar(data) {
+
+    // Update the X axis
+    x.domain(data.map(function(d) { return d.group; }))
+    xAxis.call(d3.axisBottom(x))
+
+    // Update the Y axis
+    y.domain([0, d3.max(data, function(d) { return 1 }) ]);
+    yAxis.transition().duration(1000).call(d3.axisLeft(y));
+
+    // Create the u variable
+    var u = svg2.selectAll("rect")
+        .data(data)
+
+    u
+        .enter()
+        .append("rect") // Add a new rect for each new elements
+        .merge(u) // get the already existing elements as well
+        .transition() // and apply changes to all of them
+        .duration(1000)
+        .attr("x", function(d) { return x(d.group); })
+        .attr("y", function(d) { return y(d.value); })
+        .attr("width", x.bandwidth())
+        .attr("height", function(d) { return height - y(d.value); })
+        .attr("fill", "#69b3a2")
+
+    // If less group in the new dataset, I delete the ones not in use anymore
+    u
+        .exit()
+        .remove()
+}
+
+// Initialize the plot with the first dataset
+updateBar(data1)
+
 </script>
 
 
