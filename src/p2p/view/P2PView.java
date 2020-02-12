@@ -1,9 +1,12 @@
 package p2p.view;
 
+import csvIO.csvIO;
 import simulator.SimView;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Observable;
 
 import p2p.state.P2PState;
@@ -11,13 +14,18 @@ import p2p.state.P2PState;
 public class P2PView extends SimView{
     private String Filepath = "";
     private String result = "";
-    
+    private ArrayList<csvIO> csv = new ArrayList<>();
     /**
      * 
      * @param filepath
      */
-    public P2PView(String filepath) {
-    	this.Filepath = filepath;
+    public P2PView(String filepath, int nodeAmount) {
+    	//this.Filepath = filepath;
+    	for(int i = 0; i<nodeAmount; i++) {
+    		csvIO temp = new csvIO();
+    		temp.setFile(filepath + i + ".csv");
+    		csv.add(temp);
+    	}
     }
     @Override
     public void update(Observable o, Object arg){
@@ -27,19 +35,34 @@ public class P2PView extends SimView{
         }
         else{
            // printFile(Filepath, true);
+        	try {
+				for(int i = 0; i<csv.size(); i++) {
+					csv.get(i).saveCsvMatrix();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             printConsole();
         }
     }
     public String generateProgress(P2PState state) {
-    	String result ="";
-    	result += state.getElapsedTime();
-    	result += ",";
-    	result += state.getEventDescription();
+    	String result = null;
     	if(state.getNodeWhoPerformedEvent() != "-") {
-    		result += ", Node: ";
+    		int node = Integer.parseInt(state.getNodeWhoPerformedEvent());
+    		csvIO temp = csv.get(node);
+
+    	temp.matrixNewLine();
+    	result ="";
+    	result += state.getElapsedTime();
+    	temp.matrixAdd(Double.toString(state.getElapsedTime()));
+    	result += state.getEventDescription();
+    	temp.matrixAdd(state.getEventDescription());
+    	if(state.getNodeWhoPerformedEvent() != "-") {
     		result += state.getNodeWhoPerformedEvent();
+    		temp.matrixAdd(state.getNodeWhoPerformedEvent());
     	}
-    	result += "\n";
+    	}
     	return result;
     }
     @Override

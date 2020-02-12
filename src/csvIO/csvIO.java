@@ -19,26 +19,25 @@ import java.util.ArrayList;
 public class csvIO {
 	ArrayList<ArrayList> matrix;
 	File csv;
-	public csvIO(File input) {
+	public csvIO() {
 		matrix = new ArrayList<ArrayList>(); 
-		csv = input;
 	}
 	//This is just a test function
-	public static void main(String[] args) throws IOException {
-		File file =  new File("C:\\Users\\pawel\\Desktop\\csvtest\\test.csv"); 
-		csvIO testIO = new csvIO(file); // Create an object of class MyClass (This will call the constructor)
-		testIO.getCsvMatrix();
-		ArrayList<ArrayList> test = testIO.getMatrix();
-		for(int i = 0; i<test.size();i++) {
-			ArrayList<String> temp = test.get(i);
-			for(int j = 0; j<temp.size(); j++) {
-				System.out.print(temp.get(j));
-			}
-		}
-		testIO.setFile("C:\\\\Users\\\\pawel\\\\Desktop\\\\csvtest\\\\test2.csv");
-		testIO.saveCsvMatrix();
-		
-	}
+//	public static void main(String[] args) throws IOException {
+//		File file =  new File("C:\\Users\\pawel\\Desktop\\csvtest\\test.csv"); 
+//		csvIO testIO = new csvIO(file); // Create an object of class MyClass (This will call the constructor)
+//		testIO.getCsvMatrix();
+//		ArrayList<ArrayList> test = testIO.getMatrix();
+//		for(int i = 0; i<test.size();i++) {
+//			ArrayList<String> temp = test.get(i);
+//			for(int j = 0; j<temp.size(); j++) {
+//				System.out.print(temp.get(j));
+//			}
+//		}
+//		testIO.setFile("C:\\\\Users\\\\pawel\\\\Desktop\\\\csvtest\\\\test2.csv");
+//		testIO.saveCsvMatrix();
+//		
+//	}
 	//sets file of the csvIO object to file at provided path
 	public void setFile(String path) {
 		File file =  new File(path); 

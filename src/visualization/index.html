@@ -7,6 +7,7 @@
     <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
     <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="getNumberOfNodes.js"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <!-- Create a div where the graph will take place -->
@@ -29,13 +30,20 @@
         </ul>
     </div>
 </nav>
-<script>
-    var width = window.innerWidth,
-    height = 600;
+<!-- Input field for traversing even numbers -->
+<p>
+    <label for="nValue"
+           style="display: inline-block; width: 240px; text-align: right">
+        event number = <span id="nValue-value"></span>
+    </label>
+    <input type="number" min="0" max="50" step="1" value="0" id="nValue">
+</p>
 
-    var numberOfEvents = d3.csv("node.csv").then(function (data) {
-        data.length;
-    })
+<script>
+
+    var dummy = 0;
+    var width = window.innerWidth,
+        height = 600;
 
     var colorScale = ['orange', 'lightblue', '#B19CD9'];
     var xScale = d3.scaleLinear().domain([0, 1]).range([0, 1000]);
@@ -76,6 +84,21 @@
         .force('y', d3.forceY(0).strength(0))
         .on('tick', ticked);
 
+    /*
+    //Initialize the pie when entering the page
+    function initPie() {
+        console.log("vafan")
+        d3.csv("nodes/node1.csv").then(function (data) {
+            updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
+
+        })
+        console.log("benis")
+        eventNumberToHtml()
+    }
+
+     */
+
+
     function updateLinks() {
         var u = d3.select('svg')
             .selectAll('line')
@@ -97,7 +120,6 @@
             });
         u.exit().remove()
     }
-
     function updateNodes() {
         var u = d3.select('svg')
             .selectAll('circle')
@@ -118,12 +140,18 @@
             .attr('cy', function (d) {
                 return d.y;
             })
-
-        u.on("click", function(d) {
+        u.on("click", function(d,i) {
+            // if(dummy == 0){
+            //     initPie();
+            //     dummy++;
+            // }
+            // else
             if(d.clicked == 0)
             {
                 d3.select(this).style("fill","lightcoral");
                 d3.select(this).attr('r', d.radius*2);
+                nodeMarked = i;
+                csvFile();
                 showPie();
                 d.clicked++;
             }
@@ -139,48 +167,50 @@
         u.exit().remove();
     }
 
-    let currentEvent=-1;
+    nodeMarked = -1;
+
+    function csvFile() {
+        d3.csv("nodes/node"+nodeMarked+".csv").then(function (data) {
+            updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
+        })
+    }
+    let currentEvent=0;
+
     function nextEvent() {
         currentEvent++;
-        d3.csv("node.csv").then(function (data) {
-            updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
-
-        })
+        csvFile();
         eventNumberToHtml()
     }
 
     function previousEvent() {
-        if (currentEvent > 1) {
-            currentEvent--;
-        } else {
-            currentEvent = 0;
-        }
+        currentEvent--;
+        csvFile();
+        eventNumberToHtml()
+
+    }
+    function resetEvent(){
+        currentEvent = 0;
         d3.csv("node.csv").then(function (data) {
 
             updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
         })
         eventNumberToHtml()
-
     }
 
-    function skipTenEvents() {
-        currentEvent += 10;
+    //Event input field
+    // when the input range changes update value
+    d3.select("#nValue").on("input", function() {
+        update(+this.value);
+    });
+
+    // Initial update value
+    update(0);
+
+    // adjust the text
+    function update(nValue) {
+        currentEvent = nValue;
         d3.csv("node.csv").then(function (data) {
             updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
-
-        })
-        eventNumberToHtml()
-    }
-
-    function backTenEvents() {
-        if (currentEvent > 10) {
-            currentEvent -= 10;
-        } else {
-            currentEvent = 0;
-        }
-        d3.csv("node.csv").then(function (data) {
-            updatePie({a: data[currentEvent].MAP, b: 1-data[currentEvent].MAP})
-
         })
         eventNumberToHtml()
     }
@@ -189,16 +219,15 @@
         updateLinks();
         updateNodes();
     }
+
     function eventNumberToHtml() {
         document.getElementById("output").innerHTML = currentEvent;
     }
 
 
 </script>
-
-<div id="my_dataviz"></div>
+<div id="my_dataviz"><h2>Nodes data:</h2></div>
 <p>event nr is:</p><p id="output"></p>
-
 <script>
 
     // set the dimensions and margins of the graph
@@ -217,10 +246,6 @@
         .attr("height", height)
         .append("g")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-    // create 2 data_set
-    var data1 = {a: 9, b: 20, c:30, d:8, e:12}
-    var data2 = {a: 6, b: 16, c:20, d:14, e:19, f:12}
 
     // set the color scale
     var color = d3.scaleOrdinal()
@@ -270,15 +295,16 @@
     }
 </script>
 
+
+
 <button onclick="updatePie(data1)">Data 1</button>
 <button onclick="updatePie(data2)">Data 2</button>
 <button onclick="removePie()">Remove</button>
 <button onclick="showPie()">Show</button>
 <button onclick="previousEvent()">Prev event</button>
 <button onclick="nextEvent()">Next event</button>
-<button onclick="skipTenEvents()">Skip 10 events</button>
-<button onclick="backTenEvents()">Back 10 events</button>
+<button onclick="resetEvent()">Reset events</button>
+
 
 </body>
 </html>
-
