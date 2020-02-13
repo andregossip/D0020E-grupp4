@@ -30,26 +30,14 @@
         </ul>
     </div>
 </nav>
-<!-- Input field for traversing even numbers -->
-<p>
-    <label for="nValue"
-           style="display: inline-block; width: 240px; text-align: right">
 
-<!-- Input field for traversing even numbers -->
-<p>
-    <label for="nValue" 
-        style="display: inline-block; width: 240px; text-align: right">
-        event number = <span id="nValue-value"></span>
-    </label>
-    <input type="number" min="0" max="50" step="1" value="0" id="nValue">
-</p>
 
 <script>
 
     var dummy = 0;
     var width = window.innerWidth,
         height = 600;
-    height = 600;
+    height = 350;
 
     var colorScale = ['orange', 'lightblue', '#B19CD9'];
     var xScale = d3.scaleLinear().domain([0, 1]).range([0, 1000]);
@@ -253,8 +241,8 @@
 
 
 </script>
-<div id="my_dataviz"><h2>Nodes data:</h2></div>
-<p>event nr is:</p><p id="output"></p>
+<div id="my_dataviz"><h2>Nodes mAP data:</h2></div>
+<h4>Event number is:</h4><h4 id="output"></h4>
 
 <!-- PIE CHART YOLO SWAG -->
 <script>
@@ -318,9 +306,11 @@
     }
     function removePie() {
         d3.select("tja").style("opacity", 0);
+        d3.select("tja2").style("opacity", 0);
     }
     function showPie() {
         d3.select("tja").style("opacity", 1);
+        d3.select("tja2").style("opacity", 1);
     }
 </script>
 
@@ -394,14 +384,24 @@ updateBar(data1)
 </script>
 
 
-
-<button onclick="updatePie(data1)">Data 1</button>
-<button onclick="updatePie(data2)">Data 2</button>
 <button onclick="removePie()">Remove</button>
 <button onclick="showPie()">Show</button>
 <button onclick="previousEvent()">Prev event</button>
 <button onclick="nextEvent()">Next event</button>
 <button onclick="resetEvent()">Reset events</button>
+<!-- Input field for traversing even numbers -->
+<p>
+    <label for="nValue"
+           style="display: inline-block; width: 240px; text-align: right">
+
+        <!-- Input field for traversing even numbers -->
+<p>
+    <label for="nValue"
+           style="display: inline-block; width: 240px; text-align: right">
+        event number = <span id="nValue-value"></span>
+    </label>
+    <input type="number" min="0" max="50" step="1" value="0" id="nValue">
+</p>
 
 
 </body>
